@@ -91,7 +91,8 @@ router.delete("/deleteStud/:rno", async (req, res) => {
 router.get("/searchStud/:mks", async (req, res) => {
   let mks = req.params.mks;
   try {
-    let data = await Student.find({ marks: mks }.select({ _id: 0 }));
+    data = await Student.find({ marks: mks }.select({ _id: 0 }));
+    console.log(data);
     res.send(data);
   } catch (e) {
     res.send(e);

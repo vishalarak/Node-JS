@@ -21,7 +21,11 @@
       Marks : <input type="text" id="txtMarks" class="mb-3" /><br />
       <input type="button" value="Insert" id="btnSave" class="btn btn-outline-dark m-3"/>
     </div>
-
+    <div>
+      <h3>Search Data :</h3>
+      Marks : <input type="text" id="txtSearchMks"><br>
+      <input type="button" id="btnSearch" value="Search">
+    </div>
     <div class="container bg-primary m-4">
       <h3>Update Marks :</h3>
       Roll No : <input type="text" id="txtrno" class="m-2"/><br />
@@ -44,14 +48,7 @@
             console.log(arr);
             var str = "<tr><th>Roll No</th><th>Name</th><th>Marks</th></tr>";
             for (i = 0; i < arr.length; i++) {
-              str +=
-                "<tr><td>" +
-                arr[i].rollNo +
-                "</td><td>" +
-                arr[i].name +
-                "</td><td>" +
-                arr[i].marks +
-                "</td></tr>";
+              str +="<tr><td>" +arr[i].rollNo +"</td><td>" +arr[i].name +"</td><td>" +arr[i].marks +"</td></tr>";
             }
             $("#tbl").html(str);
           });
@@ -63,9 +60,7 @@
           let mks = $("#txtMarks").val();
           let obj = { rollNo: rno, name: name, marks: mks };
           $.post(
-            "http://localhost:3000/student/insertStud",
-            obj,
-            function (data) {
+            "http://localhost:3000/student/insertStud", obj, function (data) {
               console.log(data);
             }
           );
@@ -95,7 +90,23 @@
                     console.log(data);
                 }
             })
-        })
+        });
+
+        $("#btnSearch").click(() => {
+          let mks = parseInt($("#txtSearchMks").val());
+
+          // $.ajax({
+          //   url : "http://localhost:3000/student/searchStud/"+mks,
+          //   type : "GET",
+          //   success : (data)=>{
+          //     console.log(data);
+          //   }
+          // })
+
+          $.get("http://localhost:3000/student/searchStud/"+mks, function (data) {
+              console.log(data);
+          })
+        });
       });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
