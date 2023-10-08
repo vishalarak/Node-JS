@@ -6,10 +6,12 @@ const studentSchema = new mongoose.Schema({
         default : 0
     },
     name : {
-        type : String
+        type : String,
+        default : ""
     },
     marks : {
-        type : Number
+        type : Number,
+        default :0
     },
 });
 

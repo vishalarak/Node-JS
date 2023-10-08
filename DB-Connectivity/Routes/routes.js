@@ -89,14 +89,15 @@ router.delete("/deleteStud/:rno", async (req, res) => {
 });
 
 router.get("/searchStud/:mks", async (req, res) => {
-  let mks = req.params.mks;
-  try {
-    data = await Student.find({ marks: mks }.select({ _id: 0 }));
+  let mks = parseInt(req.params.mks);
+  console.log(typeof(mks));
+  // try {
+    data = await Student.find({ marks: mks }).select({_id : 0});
     console.log(data);
     res.send(data);
-  } catch (e) {
-    res.send(e);
-  }
+  // } catch (e) {
+    // res.send(e);
+  // }
 });
 
 module.exports = router;
